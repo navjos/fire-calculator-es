@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Karla:wght@400&display=swap" rel="stylesheet">
+    <script src="script.js" defer></script>
+    <title>WealthOnthe7 Retirement Calculator</title>
+    <style>
+body {
+    font-family: 'Karla', sans-serif;
+    font-size: 4vw; /* Responsive font size */
+    max-width: 100%; /* Prevent overflow */
+    text-align: justify;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: lavender;
+    margin: 0; /* Reset default margin */
+    padding: 20px;
+    box-sizing: border-box; /* Include padding/border in width/height */
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+
+.profile-container {
+    width: 90vw; /* Adjust for mobile */
+    max-width: 600px; 
+    text-align: left;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: white;
+    border: 5px solid rgb(185, 51, 173);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    margin: 20px;
+    box-sizing: border-box; /* Include padding in the width calculation */
+}
+
+
+h1 {
+    color: #333; /* Title color */
+    font-size: 6vw; /* Responsive font size */
+    text-align: center; /* Center the title */
+    max-font-size: 36px; /* Set a maximum font size */
+}
+
+h2 {
+    color: rgb(185, 51, 173); /* Title color */
+    font-size: 5vw; /* Responsive font size */
+    max-font-size: 30px; /* Set a maximum font size */
+}
+
+input {
+    font-size: 3vw; /* Slightly smaller for a modern look */
+    width: 100%; /* Full width of the container */
+    max-width: calc(100% - 30px); /* Full width minus padding */
+    border: 2px solid #ccc; /* Thicker border */
+    border-radius: 12px; /* Rounded corners */
+    padding: 10px 15px; /* Comfortable padding inside the input */
+    transition: box-shadow 0.3s ease, border-color 0.3s ease; /* Smooth transitions */
+    background-color: #f9f9f9; /* Background color */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+h4 {
+    font-style: italic; 
+    color: grey;
+    font-size: 15px;
+
+}
+
+/* Styling the placeholder text */
+input::placeholder {
+    /* font-size: 2.8vw; Make placeholder font size slightly smaller */
+    color: #999; /* Light grey for placeholder */
+}
+
+input:focus {
+    border-color: rgb(185, 51, 173); /* Highlight border when focused */
+    box-shadow: 0 4px 8px rgba(185, 51, 173, 0.4); /* More intense shadow when focused */
+    outline: none; /* Remove default outline */
+}
+
+
+#calculateButton {
+    background-color: purple; /* Default background color */
+    font-family: 'Karla', sans-serif;
+    color: white; /* Text color */
+    padding: 10px 20px; /* Padding for size */
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded corners */
+    font-size: 1.5vw; /* Responsive font size */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: transform 0.3s ease, background-color 0.3s ease; /* Smooth transition */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
+}
+
+#calculateButton:hover {
+    background-color: rgb(185, 51, 173); /* Hover color */
+    transform: scale(1.05); /* Slight grow on hover */
+}
+
+/* Sparkle GIF styling */
+.sparkle {
+    width: 30px; /* Adjust the size of the sparkle GIF */
+    height: auto; /* Maintain aspect ratio */
+    margin-left: 10px; /* Space between title and sparkle */
+}
+
+img {
+    width: 50vw; /* Responsive width */
+    max-width: 100%; /* Ensure images don't exceed the container */
+    height: auto; /* Maintain aspect ratio */
+    display: block; /* Center block elements */
+    margin: 0 auto; /* Center images */
+}
+
+#messages,
+#result {
+    color: rgba(0, 0, 0, 0.521);
+    font-style: italic;
+}
+
+/* Media Query for smaller screens */
+@media (max-width: 480px) {
+    input {
+        max-width: calc(100% - 20px); /* Adjust max width for small screens */
+        padding: 10px; /* Reduce padding for smaller screens */
+    }
+    h1 {
+        font-size: 8vw; /* Increase font size for very small screens */
+    }
+    h2 {
+        font-size: 6vw; /* Increase font size for very small screens */
+    }
+    #calculateButton {
+        font-size: 6vw; /* Increased font size for better visibility on small screens */
+        padding: 12px 24px; /* Increased padding */
+    }
+}
+
+
+
+/* Additional media query for larger screens */
+@media (min-width: 769px) {
+    body {
+        font-size: 20px; /* Set a base font size for desktop */
+    }
+    h1 {
+        font-size: 36px; /* Set max font size for desktop */
+    }
+    h2 {
+        font-size: 30px; /* Set max font size for desktop */
+    }
+    input {
+        font-size: 2vw
+    }
+}
+    </style>
+<body>
+</head>
+<img src="w07.png">
+
+<h1>
+    <div class = "title"> <img class="sparkle" src="https://media.tenor.com/9KFWbDIvHCEAAAAi/sparkles-glitter.gif" alt="Sparkle">Retirement Calculator
+
+    </div>
+</h1>
+
+    <div class="profile-container">
+    <div class="personalprofile">
+        <h2>Perfil Personal</h2>
+        Tu Edad <br>
+        <h4>El punto de partida</h4>
+        <input type="number" id="currentage" placeholder="24" oninput="updateMessages()"><br><br>
+        Edad de Jubilación <br>
+        <h4>Cuando ya no quieras trabajar</h4>
+        <input type="number" id="retirementage" placeholder="50" oninput="updateMessages()"><br><br>
+        Edad de Coast FIRE<br>
+        <h4>Cuando puedes dejar de ahorrar para la jubilación</h4>
+        <input type="number" id="coastfireage" placeholder="40" oninput="updateMessages()"><br><br>
+    </div>
+    <br>
+    <div id="messages" style="display: none;"></div> <br>
+    
+    <div class="marketprofile" style="display: none;">
+        <h2>Perfil del Mercado</h2>
+        Tasa de Inflación (%) <br>
+        <h4>Cuánto será la inflación en el futuro</h4>
+        <input type="number" id="inflation" step ="0.1" placeholder="2.1"><br> <br>
+        Retorno nominal del mercado (%)<br>
+        <h4>Cuánto esperas que rinda el mercado en el futuro</h4>
+        <input type="number" id="nomreturn" placeholder="5"><br><br>
+        Gastos Anuales Actuales ($)<br>
+        <h4>Cuánto gastas actualmente cada año</h4>
+        <input type="number" id="currentexpenses" placeholder="34000" oninput="handleCurrentExpensesInput()"><br><br>
+        <br> <span id="result"></span><br><br>
+    
+        <div id="withdrawalSection" style="display: none;">
+            <h2>Tasa de Retiro Anual</h2> 
+            <h4>Qué porcentaje de tus ahorros planeas tocar cada año durante la jubilación</h4>
+            <!-- Choose an annual withdrawal rate:<br><br> -->
+            <input type="range" id="withdrawalrate" min="2" max="5" value="4" step="0.5" onchange="updateRate()">
+            <span id="rate_val">4</span>%<br>
+            <h2>Ahorros Actuales</h2>
+            <h4>Cuánto ya tienes ahorrado para la jubilación</h4>
+            $ <input type="number" id="initialInvestment" placeholder="140000"><br><br><br>
+            <button id="calculateButton" onclick="calculate()">Calculate</button><br>
+        </div>
+    </div>
+        <br>
+        <div id="output" style="display:none;">
+            <h2><img class="sparkle" src="https://media.tenor.com/9KFWbDIvHCEAAAAi/sparkles-glitter.gif" alt="Sparkle">Results</h2>
+            <p id="fireNumber"></p>
+            <p id="coastFireNumber"></p>
+            <p id="monthlyContributions"></p><br>
+            <h5 color="black" font-style="bold"> Sigue adelante, un paso a la vez.</h3>
+            <img id = "cartoon" src="fam3.png">
+        </div>
+    </div>    
+</div>
+</body>
+</html>
