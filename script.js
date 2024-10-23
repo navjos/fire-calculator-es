@@ -100,6 +100,7 @@ function calculate() {
     const fireNumber = futureExpenses * multiplier;
     const currentAge = parseFloat(document.getElementById("currentage").value);
     const coastFireAge = parseFloat(document.getElementById("coastfireage").value);
+    const fireAge = parseFloat(document.getElementById("retirementage").value);
     const nominalMarketReturn = parseFloat(document.getElementById("nomreturn").value) / 100;
 
     // Validate coast fire age and market return
@@ -111,7 +112,7 @@ function calculate() {
     }
 
     // Calculate coast fire number and monthly payments
-    const coastFireNumber = fireNumber / Math.pow((1 + nominalMarketReturn), (coastFireAge - currentAge));
+    const coastFireNumber = fireNumber / Math.pow((1 + nominalMarketReturn), (fireAge - coastFireAge));
     const initialInvestment = parseFloat(document.getElementById("initialInvestment").value) || 0;
     const yearsToGrow = coastFireAge - currentAge;
 
